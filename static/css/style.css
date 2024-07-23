@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#draggable {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 300px;
+    height: 400px;
+    background-color: lightgrey;
+    border: 1px solid #ccc;
+    z-index: 1000; /* Ensure it's on top of other elements */
+    overflow: auto; /* Add scroll if content overflows */
+}
+
+.script-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin-left: 20px; /* Indentation for nested lists */
+}
+
+.script-menu li {
+    margin: 5px 0;
+}
+
+.script-menu a {
+    text-decoration: none;
+    color: white; /* Set the text color to white for better readability on dark backgrounds */
+}
+
+.script-menu a:hover {
+    text-decoration: underline;
+}
+
+.directory-level-1 {
+    background-color: #003366; /* Dark blue background for first-tier directories */
+}
+
+.directory-level-2 {
+    background-color: #336699; /* Slightly lighter blue background for second-tier directories */
+}
+
+.directory-level-3 {
+    background-color: #6699cc; /* Even lighter blue background for third-tier directories */
+}
+
+.script {
+    background-color: #99ccff; /* Light blue background for scripts */
+    color: black; /* Black text for better readability */
+}

@@ -41,8 +41,8 @@ jQueryNoConflict(document).ready(function($) {
 
             // Check the structure of the response
             if (Array.isArray(response)) {
-                var omeroHtml = buildScriptMenuHtml(response.filter(folder => folder.name === "omero"));
-                var biomeroHtml = buildScriptMenuHtml(response.filter(folder => folder.name === "biomero"));
+                var omeroHtml = buildScriptMenuHtml(response.find(folder => folder.name === "omero").ul);
+                var biomeroHtml = buildScriptMenuHtml(response.find(folder => folder.name === "biomero").ul);
 
                 $("#omero").html(omeroHtml);
                 $("#biomero").html(biomeroHtml);
@@ -60,13 +60,16 @@ jQueryNoConflict(document).ready(function($) {
     function buildScriptMenuHtml(scriptMenu) {
         var html = '';
         scriptMenu.forEach(function(item) {
-            if (item.id) {
-                // Leaf node (script)
-                html += '<div class="script-card"><a href="' + item.href + '" class="script-link" data-id="' + item.id + '">' + item.name + '</a></div>';
-            } else {
+            if (item.ul) {
                 // Directory node
+                html += '<div class="directory">';
                 html += '<div class="subdirectory-header">' + item.name + '</div>';
                 html += '<div class="script-cards-container">' + buildScriptMenuHtml(item.ul) + '</div>';
+                html += '</div>';
+            } else if (item.id) {
+                // Leaf node (script)
+                var scriptName = item.name.replace('.py', ''); // Remove the '.py' suffix
+                html += '<div class="script-card"><a href="' + item.href + '" class="script-link" data-id="' + item.id + '">' + scriptName + '</a></div>';
             }
         });
         return html;
@@ -86,6 +89,8 @@ jQueryNoConflict(document).ready(function($) {
         document.getElementById(tabName).style.display = "block";
         if (event) {
             event.currentTarget.className += " active";
+        } else {
+            document.querySelector(".tablink[onclick=\"openTab(event, '" + tabName + "')\"]").classList.add("active");
         }
     }
 
@@ -107,11 +112,12 @@ jQueryNoConflict(document).ready(function($) {
     // Fetch and render the script menu on page load
     fetchScriptMenu();
 
-    // Bind click event to script links
-    $("#widget_window").on('click', 'a.script-link', function(event) {
+    // Bind click event to script cards
+    $("#widget_window").on('click', '.script-card', function(event) {
         event.preventDefault();
-        var scriptId = $(this).data('id');
-        var scriptHref = $(this).attr('href');
+        var scriptLink = $(this).find('a.script-link');
+        var scriptId = scriptLink.data('id');
+        var scriptHref = scriptLink.attr('href');
         console.log("Clicked script ID:", scriptId, "with href:", scriptHref);
         // Open script window or handle script execution here
         // For now, just log the script ID and href

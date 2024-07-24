@@ -48,6 +48,8 @@ body {
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
+    color: black; /* Set text color to black */
+    font-weight: bold; /* Match the text style of subdirectory headers */
 }
 
 .tabs button:hover {
@@ -55,7 +57,7 @@ body {
 }
 
 .tabs button.active {
-    background-color: #ccc;
+    background-color: #99ccff; /* Highlight the active tab */
 }
 
 .tabs input[type="text"] {
@@ -68,37 +70,49 @@ body {
 
 .tabcontent {
     display: none;
-    padding: 20px;
     border: 1px solid #ccc;
     border-top: none;
+    overflow-y: auto;
+    height: calc(100% - 40px);
+}
+
+.directory {
+    background-color: #336699; /* Moved background color to directory class */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px; /* Optional: Add some border radius for better appearance */
 }
 
 .subdirectory-header {
-    background-color: #336699; /* Slightly lighter blue for subdirectory headers */
-    color: white;
-    padding: 10px;
-    margin-top: 10px;
+    background-color: transparent; /* Set background to transparent */
+    color: white; /* Keep the text color white */
+    padding-bottom: 10px; /* Padding under it */
+    padding-top: 0; /* No padding above it */
+    cursor: pointer;
 }
 
 .script-cards-container {
     display: flex;
     flex-wrap: wrap;
+    gap: 10px; /* Optional: Add some gap between cards */
 }
 
 .script-card {
     background-color: #99ccff; /* Light blue background for script cards */
     color: black; /* Black text for better readability */
-    padding: 10px;
-    margin: 10px;
+    padding: 20px; /* Increase padding for larger size */
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100px;
+    flex: 1 1 calc(33.333% - 20px); /* Flexible width to allow 3 cards side by side */
     text-align: center;
+    box-sizing: border-box;
+    min-width: 200px; /* Minimum width to ensure cards are not too small */
+    height: 150px; /* Increase height for larger size */
 }
 
 .minimized {
-    width: 20px; /* Small square size */
-    height: 20px;
+    width: 30px; /* Small square size */
+    height: 30px;
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -141,4 +155,8 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.script-link {
+    text-decoration: none; /* Remove underline from script links */
 }

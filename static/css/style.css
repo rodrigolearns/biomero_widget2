@@ -91,6 +91,17 @@ body {
     cursor: pointer;
 }
 
+@media (max-width: 600px), (max-height: 600px) {
+    .subdirectory-header {
+        display: none; /* Hide subdirectory headers */
+    }
+
+    .script-card {
+        height: auto; /* Adjust height to fit content */
+        padding: 10px; /* Reduce padding */
+    }
+}
+
 .script-cards-container {
     display: flex;
     flex-wrap: wrap;

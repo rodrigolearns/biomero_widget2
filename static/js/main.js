@@ -123,4 +123,28 @@ jQueryNoConflict(document).ready(function($) {
         // For now, just log the script ID and href
         window.open(scriptHref, '_blank'); // This will open the href in a new tab
     });
+
+    // Function to handle special behaviors based on widget size
+    function handleWidgetResize() {
+        var widget = $("#widget_window");
+        if (widget.width() < 600 || widget.height() < 600) {
+            $(".subdirectory-header").hide(); // Hide subdirectory headers
+            $(".script-card").css({
+                height: 'auto', // Adjust height to fit content
+                padding: '10px' // Reduce padding
+            });
+        } else {
+            $(".subdirectory-header").show(); // Show subdirectory headers
+            $(".script-card").css({
+                height: '150px', // Restore original height
+                padding: '20px' // Restore original padding
+            });
+        }
+    }
+
+    // Bind the resize event to handleWidgetResize function
+    $("#widget_window").on('resize', handleWidgetResize);
+
+    // Initial call to handleWidgetResize to set the correct state on load
+    handleWidgetResize();
 });

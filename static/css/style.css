@@ -13,6 +13,7 @@ body {
     z-index: 1000;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    min-width: 300px; /* Set minimum width */
 }
 
 .window-header {
@@ -35,21 +36,34 @@ body {
 }
 
 .tabs {
-    overflow: hidden;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
     background-color: #f1f1f1;
     border-bottom: 1px solid #ccc;
+    padding: 5px;
 }
 
 .tabs button {
     background-color: inherit;
-    float: left;
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 10px;
     transition: 0.3s;
     color: black; /* Set text color to black */
     font-weight: bold; /* Match the text style of subdirectory headers */
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+.tabs input[type="text"] {
+    flex: 0 1 55%; /* Flex-grow: 0, flex-shrink: 1, flex-basis: 25% */
+    padding: 6px;
+    margin-left: auto; /* Align the search bar to the right */
+    border: none;
+    font-size: 17px;
+    transition: width 0.3s; /* Smooth transition for width change */
+    max-width: 200px; /* Set maximum width for the search bar */
+    min-width: 50px; /* Set minimum width for the search bar */
 }
 
 .tabs button:hover {
@@ -58,14 +72,6 @@ body {
 
 .tabs button.active {
     background-color: #99ccff; /* Highlight the active tab */
-}
-
-.tabs input[type="text"] {
-    float: right;
-    padding: 6px;
-    margin: 8px;
-    border: none;
-    font-size: 17px;
 }
 
 .tabcontent {
@@ -151,7 +157,7 @@ body {
 #widget_window.minimized .window-header,
 #widget_window.minimized .tabs,
 #widget_window.minimized .tabcontent {
-    display: none;
+    display: none; /* Hide all contents */
 }
 
 #widget_window.minimized .restore-btn {

@@ -1,16 +1,27 @@
 var jQueryNoConflict = jQuery.noConflict(true);
 
 jQueryNoConflict(document).ready(function($) {
+    var originalSize = {
+        width: $("#widget_window").width(),
+        height: $("#widget_window").height()
+    };
+
     $("#widget_window").resizable({
         handles: "all"
     }).draggable({
-        handle: ".window-header"
+        handle: ".window-header",
+        containment: "window" // Restrict movement within the window
     });
 
     // Minimize button functionality
     $(".minimize-btn").on('click', function() {
         $("#widget_window").addClass("minimized").draggable("option", "handle", ".restore-btn");
         $("#widget_window").resizable("option", "disabled", true);
+        $("#widget_window .window-header, #widget_window .tabs, #widget_window .tabcontent").hide(); // Hide all contents
+        $("#widget_window").css({
+            width: '30px',
+            height: '30px'
+        });
         if ($(".restore-btn").length === 0) {
             $("#widget_window").append('<div class="restore-btn">+</div>');
         }
@@ -20,12 +31,18 @@ jQueryNoConflict(document).ready(function($) {
     $("#widget_window").on('click', '.restore-btn', function() {
         $("#widget_window").removeClass("minimized").draggable("option", "handle", ".window-header");
         $("#widget_window").resizable("option", "disabled", false);
+        $("#widget_window .window-header, #widget_window .tabs, #widget_window .tabcontent").show(); // Show all contents
+        $("#widget_window").css({
+            width: originalSize.width,
+            height: originalSize.height
+        });
         $(".restore-btn").remove();
     });
 
     // Maximize button functionality
     $(".maximize-btn").on('click', function() {
         $("#widget_window").toggleClass("maximized");
+        handleWidgetResize(); // Call handleWidgetResize to adjust script card sizes
     });
 
     // Close button functionality
@@ -133,11 +150,17 @@ jQueryNoConflict(document).ready(function($) {
                 height: 'auto', // Adjust height to fit content
                 padding: '10px' // Reduce padding
             });
+            $("#searchBar").css({
+                width: '100px' // Narrower width for smaller widget
+            });
         } else {
             $(".subdirectory-header").show(); // Show subdirectory headers
             $(".script-card").css({
                 height: '150px', // Restore original height
                 padding: '20px' // Restore original padding
+            });
+            $("#searchBar").css({
+                width: '' // Reset to default width
             });
         }
     }
@@ -146,5 +169,7 @@ jQueryNoConflict(document).ready(function($) {
     $("#widget_window").on('resize', handleWidgetResize);
 
     // Initial call to handleWidgetResize to set the correct state on load
-    handleWidgetResize();
+    $(window).on('load', function() {
+        handleWidgetResize();
+    });
 });

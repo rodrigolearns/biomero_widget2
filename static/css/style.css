@@ -78,8 +78,8 @@ body {
 
 .directory {
     background-color: #336699; /* Moved background color to directory class */
-    padding: 10px;
-    margin-top: 10px;
+    padding: 5px; /* Halved the top padding */
+    margin-top: 5px; /* Halved the margin-top */
     border-radius: 5px; /* Optional: Add some border radius for better appearance */
 }
 
@@ -105,20 +105,22 @@ body {
 .script-cards-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Optional: Add some gap between cards */
+    gap: 5px; /* Halved the gap between cards */
 }
 
 .script-card {
     background-color: #99ccff; /* Light blue background for script cards */
     color: black; /* Black text for better readability */
-    padding: 20px; /* Increase padding for larger size */
+    padding: 10px; /* Halved the padding */
     border: 1px solid #ccc;
     border-radius: 5px;
-    flex: 1 1 calc(33.333% - 20px); /* Flexible width to allow 3 cards side by side */
+    flex: 1 1 calc(33.333% - 10px); /* Flexible width to allow 3 cards side by side */
     text-align: center;
     box-sizing: border-box;
     min-width: 200px; /* Minimum width to ensure cards are not too small */
     height: 150px; /* Increase height for larger size */
+    overflow: hidden; /* Ensure content does not overflow */
+    position: relative; /* Required for the fade effect */
 }
 
 .minimized {
@@ -170,4 +172,20 @@ body {
 
 .script-link {
     text-decoration: none; /* Remove underline from script links */
+    display: block; /* Ensure the link takes up the full card */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis to indicate overflow */
+    max-width: 100%; /* Ensure the text does not exceed the card width */
+    position: relative; /* Required for the fade effect */
+}
+
+.script-link::after {
+    content: ''; /* Add a fade effect */
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px; /* Adjust width as needed */
+    background: linear-gradient(to left, #99ccff, transparent); /* Fade effect */
 }

@@ -127,7 +127,7 @@ jQueryNoConflict(document).ready(function($) {
     // Function to handle special behaviors based on widget size
     function handleWidgetResize() {
         var widget = $("#widget_window");
-        if (widget.width() < 600 || widget.height() < 600) {
+        if (widget.width() < 500 || widget.height() < 500) {
             $(".subdirectory-header").hide(); // Hide subdirectory headers
             $(".script-card").css({
                 height: 'auto', // Adjust height to fit content

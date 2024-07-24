@@ -1,0 +1,182 @@
+[
+  {
+    "name": "biomero",
+    "ul": [
+      {
+        "name": "data",
+        "ul": [
+          {
+            "name": "_SLURM_Image_Transfer.py",
+            "id": 63,
+            "href": "about:blank"
+          },
+          {
+            "name": "SLURM_Get_Results.py",
+            "id": 64,
+            "href": "about:blank"
+          },
+          {
+            "name": "SLURM_Get_Update.py",
+            "id": 62,
+            "href": "about:blank"
+          },
+          {
+            "name": "SLURM_Remote_Conversion.py",
+            "id": 61,
+            "href": "about:blank"
+          }
+        ]
+      },
+      {
+        "name": "Example_Minimal_Slurm_Script.py",
+        "id": 68,
+        "href": "about:blank"
+      },
+      {
+        "name": "init",
+        "ul": [
+          {
+            "name": "SLURM_check_setup.py",
+            "id": 70,
+            "href": "about:blank"
+          },
+          {
+            "name": "SLURM_Init_environment.py",
+            "id": 69,
+            "href": "about:blank"
+          }
+        ]
+      },
+      {
+        "name": "workflows",
+        "ul": [
+          {
+            "name": "SLURM_CellPose_Segmentation.py",
+            "id": 67,
+            "href": "about:blank"
+          },
+          {
+            "name": "SLURM_Run_Workflow.py",
+            "id": 65,
+            "href": "about:blank"
+          },
+          {
+            "name": "SLURM_Run_Workflow_Batched.py",
+            "id": 66,
+            "href": "about:blank"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "omero",
+    "ul": [
+      {
+        "name": "analysis_scripts",
+        "ul": [
+          {
+            "name": "Kymograph.py",
+            "id": 5,
+            "href": "about:blank"
+          },
+          {
+            "name": "Kymograph_Analysis.py",
+            "id": 3,
+            "href": "about:blank"
+          },
+          {
+            "name": "Plot_Profile.py",
+            "id": 4,
+            "href": "about:blank"
+          }
+        ]
+      },
+      {
+        "name": "annotation_scripts",
+        "ul": [
+          {
+            "name": "KeyVal_from_csv.py",
+            "id": 15,
+            "href": "about:blank"
+          },
+          {
+            "name": "KeyVal_to_csv.py",
+            "id": 16,
+            "href": "about:blank"
+          },
+          {
+            "name": "Remove_KeyVal.py",
+            "id": 14,
+            "href": "about:blank"
+          }
+        ]
+      },
+      {
+        "name": "export_scripts",
+        "ul": [
+          {
+            "name": "Batch_Image_Export.py",
+            "id": 12,
+            "href": "about:blank"
+          },
+          {
+            "name": "Batch_ROI_Export.py",
+            "id": 11,
+            "href": "about:blank"
+          }
+        ]
+      },
+      {
+        "name": "figure_scripts",
+        "ul": [
+          {
+            "name": "Movie_ROI_Figure.py",
+            "id": 6,
+            "href": "about:blank"
+          }
+        ]
+      },
+      {
+        "name": "import_scripts",
+        "ul": [
+          {
+            "name": "Populate_Metadata.py",
+            "id": 1,
+            "href": "about:blank"
+          }
+        ]
+      },
+      {
+        "name": "util_scripts",
+        "ul": [
+          {
+            "name": "Channel_Offsets.py",
+            "id": 17,
+            "href": "about:blank"
+          },
+          {
+            "name": "Combine_Images.py",
+            "id": 21,
+            "href": "about:blank"
+          },
+          {
+            "name": "Dataset_To_Plate.py",
+            "id": 19,
+            "href": "about:blank"
+          },
+          {
+            "name": "Images_From_ROIs.py",
+            "id": 18,
+            "href": "about:blank"
+          },
+          {
+            "name": "Move_Annotations.py",
+            "id": 20,
+            "href": "about:blank"
+          }
+        ]
+      }
+    ]
+  }
+]

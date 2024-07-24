@@ -1,62 +1,59 @@
 var jQueryNoConflict = jQuery.noConflict(true);
 
 jQueryNoConflict(document).ready(function($) {
-    $("#draggable").draggable().resizable();
+    $("#widget_window").resizable({
+        handles: "all"
+    }).draggable({
+        handle: ".window-header"
+    });
 
-    // Sample script structure with updated script names
-    var sampleScripts = [
-        {
-            "name": "biomero",
-            "ul": [
-                {"name": "Script 1", "id": 1},
-                {"name": "Script 2", "id": 2}
-            ]
-        },
-        {
-            "name": "omero",
-            "ul": [
-                {
-                    "name": "analysis_scripts",
-                    "ul": [
-                        {"name": "Script 3", "id": 3},
-                        {"name": "Script 4", "id": 4},
-                        {"name": "Script 5", "id": 5}
-                    ]
-                },
-                {
-                    "name": "annotation_scripts",
-                    "ul": [
-                        {"name": "Script 6", "id": 6},
-                        {"name": "Script 7", "id": 7}
-                    ]
-                },
-                {
-                    "name": "export_scripts",
-                    "ul": [
-                        {"name": "Script 8", "id": 8},
-                        {"name": "Script 9", "id": 9}
-                    ]
-                },
-                {
-                    "name": "import_scripts",
-                    "ul": [
-                        {"name": "Script 10", "id": 10}
-                    ]
-                }
-            ]
+    // Minimize button functionality
+    $(".minimize-btn").on('click', function() {
+        $("#widget_window").addClass("minimized").draggable("option", "handle", ".restore-btn");
+        $("#widget_window").resizable("option", "disabled", true);
+        if ($(".restore-btn").length === 0) {
+            $("#widget_window").append('<div class="restore-btn">+</div>');
         }
-    ];
+    });
+
+    // Restore button functionality
+    $("#widget_window").on('click', '.restore-btn', function() {
+        $("#widget_window").removeClass("minimized").draggable("option", "handle", ".window-header");
+        $("#widget_window").resizable("option", "disabled", false);
+        $(".restore-btn").remove();
+    });
+
+    // Maximize button functionality
+    $(".maximize-btn").on('click', function() {
+        $("#widget_window").toggleClass("maximized");
+    });
+
+    // Close button functionality
+    $(".close-btn").on('click', function() {
+        $("#widget_window").hide();
+    });
 
     // Function to fetch and render the script menu
     function fetchScriptMenu() {
-        var omeroHtml = buildScriptMenuHtml(sampleScripts[1].ul);
-        var biomeroHtml = buildScriptMenuHtml(sampleScripts[0].ul);
-        
-        $("#omero").html(omeroHtml);
-        $("#biomero").html(biomeroHtml);
+        $.getJSON("static/data/script_data.json", function(response) {
+            // Handle the response from the server
+            console.log("Script menu fetched successfully:", response);
 
-        // Show the default tab (omero)
-        openTab(null, 'omero');
+            // Check the structure of the response
+            if (Array.isArray(response)) {
+                var omeroHtml = buildScriptMenuHtml(response.filter(folder => folder.name === "omero"));
+                var biomeroHtml = buildScriptMenuHtml(response.filter(folder => folder.name === "biomero"));
+
+                $("#omero").html(omeroHtml);
+                $("#biomero").html(biomeroHtml);
+
+                // Show the default tab (omero)
+                openTab(null, 'omero');
+            } else {
+                console.error("Unexpected response format:", response);
+                $("#widget_window").html("<p>Error loading script menu.</p>");
+            }
+        });
     }
 
     // Function to build the script menu HTML
@@ -65,7 +62,7 @@ jQueryNoConflict(document).ready(function($) {
         scriptMenu.forEach(function(item) {
             if (item.id) {
                 // Leaf node (script)
-                html += '<div class="script-card">' + item.name + '</div>';
+                html += '<div class="script-card"><a href="' + item.href + '" class="script-link" data-id="' + item.id + '">' + item.name + '</a></div>';
             } else {
                 // Directory node
                 html += '<div class="subdirectory-header">' + item.name + '</div>';
@@ -109,4 +106,15 @@ jQueryNoConflict(document).ready(function($) {
 
     // Fetch and render the script menu on page load
     fetchScriptMenu();
+
+    // Bind click event to script links
+    $("#widget_window").on('click', 'a.script-link', function(event) {
+        event.preventDefault();
+        var scriptId = $(this).data('id');
+        var scriptHref = $(this).attr('href');
+        console.log("Clicked script ID:", scriptId, "with href:", scriptHref);
+        // Open script window or handle script execution here
+        // For now, just log the script ID and href
+        window.open(scriptHref, '_blank'); // This will open the href in a new tab
+    });
 });

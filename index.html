@@ -3,14 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Draggable Widget</title>
+    <title>Script Menu Widget</title>
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
     <!-- jQuery and jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="static/js/main.js"></script>
 </head>
 <body>
-    <div id="draggable">
+    <div id="widget_window" class="ui-widget-content">
+        <div class="window-header ui-widget-header">
+            <span class="window-title">Script Menu Widget</span>
+            <div class="window-controls">
+                <button class="minimize-btn">_</button>
+                <button class="maximize-btn">□</button>
+                <button class="close-btn">×</button>
+            </div>
+        </div>
         <div class="tabs">
             <button class="tablink" onclick="openTab(event, 'omero')">omero</button>
             <button class="tablink" onclick="openTab(event, 'biomero')">biomero</button>
@@ -23,6 +33,5 @@
             <!-- biomero scripts will be loaded here -->
         </div>
     </div>
-    <script src="static/js/main.js"></script>
 </body>
 </html>
